@@ -8,15 +8,6 @@ const CREATE_CUSTOMERS_TABLE = `
   );
 `;
 
-const CREATE_INVOICES_TABLE = `
-    CREATE TABLE IF NOT EXISTS Invoices (
-        invoice_id TEXT PRIMARY KEY,      -- You will assign the invoice_id manually as a text value
-        date_of_issue DATE NOT NULL,       -- Date when the invoice was issued
-        customer_id INTEGER,               -- Foreign key referencing customer_id from the Customers table
-        FOREIGN KEY (customer_id) REFERENCES Customers (customer_id)
-    );
-`
-
 const CREATE_TAX_TYPES_TABLE = `
     CREATE TABLE IF NOT EXISTS Tax_Types (
         tax_type_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,22 +35,24 @@ CREATE TABLE IF NOT EXISTS Items (
 );
 `
 
-const CREATE_INVOICE_ITEMS_TABLE = `
-    CREATE TABLE IF NOT EXISTS Invoice_Items (
-        invoice_id INTEGER,                       -- Foreign key referencing invoice_id from Invoices table
-        item_id INTEGER,                          -- Foreign key referencing item_id from Items table
-        quantity INTEGER NOT NULL,                -- Quantity of the item in the invoice
-        PRIMARY KEY (invoice_id, item_id),        -- Composite primary key (invoice_id, item_id)
-        FOREIGN KEY (invoice_id) REFERENCES Invoices(invoice_id),  -- Foreign key constraint on invoice_id
-        FOREIGN KEY (item_id) REFERENCES Items(item_id)           -- Foreign key constraint on item_id
+const CREATE_SETTINGS_TABLE = `
+    CREATE TABLE IF NOT EXISTS Settings (
+        key TEXT PRIMARY KEY,
+        value INTEGER NOT NULL
     );
-`
+`;
+
+const INSERT_INITIAL_COUNTER = `
+    INSERT OR IGNORE INTO Settings (key, value) VALUES ('next_invoice_number', 1);
+`;
+
+
 
 module.exports = {
     CREATE_CUSTOMERS_TABLE,
-    CREATE_INVOICES_TABLE,
     CREATE_TAX_TYPES_TABLE,
     CREATE_UNITS_TABLE,
     CREATE_ITEMS_TABLE,
-    CREATE_INVOICE_ITEMS_TABLE
+    CREATE_SETTINGS_TABLE,
+    INSERT_INITIAL_COUNTER
 };

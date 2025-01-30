@@ -3,8 +3,8 @@ const INSERT_CUSTOMER = `
     VALUES (?, ?, ?, ?, ?);
 `;
 
-const GET_CUSTOMERS_DYNAMIC = `
-    SELECT DISTINCT * FROM customers WHERE
+const GET_CUSTOMERS = `
+    SELECT DISTINCT * FROM customers
 `;
 
 const UPDATE_CUSTOMER = `
@@ -23,7 +23,7 @@ const DELETE_CUSTOMER = `
 
 module.exports = {
     INSERT_CUSTOMER,
-    GET_CUSTOMERS_DYNAMIC,
+    GET_CUSTOMERS,
     UPDATE_CUSTOMER,
     DELETE_CUSTOMER,
 }

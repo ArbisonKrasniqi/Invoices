@@ -52,47 +52,25 @@ class customers_repo {
         });
     }
 
-    static async getCustomer(customer) {
-        let query = customer_queries.GET_CUSTOMERS_DYNAMIC;
+    static async getCustomers() {
+        let query = customer_queries.GET_CUSTOMERS;
+        const db = await getDB();
+
+        return new Promise((resolve, reject) => {
+            db.all(query, (err, result) => {
+                if (err) return reject(err);
+                resolve(result);
+            })
+        })
+    }
+
+    static async getCustomer(customer_id) {
+        let query = customer_queries.GET_CUSTOMERS + ' WHERE customer_id = ?;';
 
         const db = await getDB();
 
-        const conditions = [];
-        const values = [];
-
-        if (customer.customer_id) {
-            conditions.push("customer_id = ?");
-            values.push(customer.customer_id);
-        }
-
-        if (customer.name) {
-            conditions.push("name = ?");
-            values.push(customer.name);
-        }
-
-        if (customer.address) {
-            conditions.push("address = ?");
-            values.push(customer.address);
-        }
-
-        if (customer.email) {
-            conditions.push("email = ?");
-            values.push(customer.email);
-        }
-
-        if (customer.contact_number) {
-            conditions.push("contact_number = ?");
-            values.push(customer.contact_number);
-        }
-
-        if (conditions.length === 0) {
-            throw new Error("No parameters sent");
-        }
-
-        query += ` ${conditions.join(" AND ")}`;
-
         return new Promise ((resolve, reject) => {
-            db.all(query, values, (err, result) => {
+            db.all(query, [customer_id], (err, result) => {
                 if (err) {
                     return reject(err);
                 }
