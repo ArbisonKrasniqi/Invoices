@@ -89,7 +89,7 @@ class items_repo {
     }
 
     static async getItemsByUnit(unit_id) {
-        const query = units_queries.GET_ITEMS;
+        const query = units_queries.GET_ITEMS_BY_UNIT;
         const db = await getDB();
 
         return new Promise((resolve, reject) => {

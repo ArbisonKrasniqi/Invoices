@@ -48,10 +48,8 @@ class units_repo {
         const query = units_queries.DELETE_UNIT;
         const db = await getDB();
 
-        //DUHET ME KQYR A E PERDOR NAJ ITEM UNIT
-
         return new Promise((resolve, reject) => {
-            db.run(query, [unit_id], function (err) {
+            db.run(query, [unit_id.toString()], function (err) {
                 if (err) {
                     return reject(err);
                 }

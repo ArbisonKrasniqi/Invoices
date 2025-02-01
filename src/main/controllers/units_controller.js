@@ -47,7 +47,7 @@ const setupUnitsController = () => {
             if (!unit.unit_id) throw new CustomError(400, 'Unit id is required', null);
             if (!unit.name) throw new CustomError(400, 'Unit name is required', null);
 
-            const list = await units_repo.getUnit(unit_id);
+            const list = await units_repo.getUnit(unit.unit_id);
             if (list.length === 0) throw new CustomError(404, "Unit not found!", null);
             const toBeUpdated = list[0];
 

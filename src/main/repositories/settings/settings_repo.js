@@ -4,7 +4,7 @@ const {getDB} = require('../../db/db');
 class settings_repo {
     static async getSettings() {
         const query = settings_queries.GET_SETTINGS;
-        const db = await getDB(query);
+        const db = await getDB();
 
         return new Promise((resolve, reject) => {
             db.all(query, (err, result) => {
@@ -28,3 +28,5 @@ class settings_repo {
         });
     }
 }
+
+module.exports = { settings_repo };

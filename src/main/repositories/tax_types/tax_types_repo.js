@@ -77,3 +77,5 @@ class tax_types_repo {
         });
     }
 }
+
+module.exports = { tax_types_repo };

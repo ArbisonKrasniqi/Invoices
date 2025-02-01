@@ -1,15 +1,17 @@
 import React from "react";
-import AddCustomerForm from "../components/AddCustomerForm.jsx";
-import DeleteCustomerForm from "../components/DeleteCustomerForm.jsx";
-import UpdateCustomerForm from "../components/UpdateCustomerForm.jsx";
-
+import {GlobalProvider} from "./GlobalContext.jsx";
+import SideBar from "./components/SideBar/SideBar.jsx";
+import Pages from "./Pages/Pages";
 function App() {
   return (
     <>
-        <h1>Development Mode</h1>
-        <AddCustomerForm></AddCustomerForm>
-        <DeleteCustomerForm></DeleteCustomerForm>
-        <UpdateCustomerForm></UpdateCustomerForm>
+      <GlobalProvider>
+          <div className='flex flex-row h-100%'>
+              <SideBar/>
+              <Pages/>
+          </div>
+
+      </GlobalProvider>
     </>
   )
 }

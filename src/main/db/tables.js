@@ -38,12 +38,27 @@ CREATE TABLE IF NOT EXISTS Items (
 const CREATE_SETTINGS_TABLE = `
     CREATE TABLE IF NOT EXISTS Settings (
         key TEXT PRIMARY KEY,
-        value INTEGER NOT NULL
+        value TEXT
     );
 `;
 
-const INSERT_INITIAL_COUNTER = `
-    INSERT OR IGNORE INTO Settings (key, value) VALUES ('next_invoice_number', 1);
+const CREATE_SELLER_TABLE = `
+    CREATE TABLE IF NOT EXISTS Seller (
+        key TEXT PRIMARY KEY,
+        value TEXT
+    );
+`;
+
+const INSERT_INITIAL_SETTINGS = `
+    INSERT OR IGNORE INTO Settings (key, value) VALUES 
+                                   ('next_invoice_number', '1'),
+                                   ('seller', NULL),
+                                   ('address', NULL),
+                                   ('NRF', NULL),
+                                   ('TVSH', NULL),
+                                   ('contact_number', NULL),
+                                   ('email', NULL),
+                                   ('banks', NULL)
 `;
 
 
@@ -54,5 +69,5 @@ module.exports = {
     CREATE_UNITS_TABLE,
     CREATE_ITEMS_TABLE,
     CREATE_SETTINGS_TABLE,
-    INSERT_INITIAL_COUNTER
+    INSERT_INITIAL_SETTINGS
 };

@@ -45,7 +45,7 @@ const setupTaxTypesController = () => {
     ipcMain.handle("deleteTaxType", async (event, tax_type_id) => {
         try {
             const list = await tax_types_repo.getTaxType(tax_type_id);
-            if (list.length === 0) throw new Error("Tax type not found!");
+            if (list.length === 0) throw new CustomError(404, "Tax type not found!", null);
 
             const itemList = await items_repo.getItemsByTaxType(tax_type_id);
             if (itemList.length !== 0) throw new CustomError(409, "Tax type is being used!", itemList);
