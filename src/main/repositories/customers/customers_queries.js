@@ -10,15 +10,16 @@ const GET_CUSTOMERS = `
 const UPDATE_CUSTOMER = `
     UPDATE Customers
     SET
+        customer_id = ?,
         name = ?,
         address = ?,
         email = ?,
         contact_number = ?
-    WHERE customer_id = ?; 
+    WHERE id = ?; 
 `
 
 const DELETE_CUSTOMER = `
-    DELETE FROM Customers WHERE customer_id = ?;
+    DELETE FROM Customers WHERE id = ?;
 `;
 
 module.exports = {

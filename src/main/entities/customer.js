@@ -1,5 +1,6 @@
 class Customer {
-    constructor(customer_id = null, name = null, address = null, email = null, contact_number = null) {
+    constructor(id = null, customer_id = null, name = null, address = null, email = null, contact_number = null) {
+        this.id = null;
         this.customer_id = customer_id;
         this.name = name;
         this.address = address;

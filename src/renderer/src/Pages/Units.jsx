@@ -2,17 +2,15 @@ import {useContext, useState, useEffect} from "react";
 import {GlobalContext} from "../GlobalContext.jsx";
 import CustomError from "../Entities/CustomError.jsx";
 import CustomTableHead from "../components/CustomTableHead.jsx";
-import {Button, Input} from "@material-tailwind/react"
-
 import CustomTable from "../components/CustomTable.jsx";
-
+import {Button, Input} from "@material-tailwind/react"
 import{
     MagnifyingGlassIcon,
     TrashIcon
 } from "@heroicons/react/24/solid/index.js";
 
 const Units = () => {
-    const {units, setUnits, errors, setErrors, setResetUnits} = useContext(GlobalContext);
+    const {units, setErrors, setResetUnits} = useContext(GlobalContext);
 
     //Form data will be used for create and edit
     const [unitName, setUnitName] = useState("");
@@ -32,7 +30,7 @@ const Units = () => {
         try {
             const createResult = await window.api.addUnit(unitName);
             if (createResult.success){
-                console.log("Unit: "+unitName+" successfully created")
+                console.log("Unit: "+unitName+" successfully created");
                 setResetUnits((prev => !prev));
             } else {
                 throw new CustomError(createResult.error.code, createResult.error.message, createResult.error.data);
@@ -75,7 +73,7 @@ const Units = () => {
             } else {
                 throw new CustomError(updateResult.error.code, updateResult.error.message, updateResult.error.data);
             }
-        }catch (err) {
+        } catch (err) {
             const error = CustomError.fromError(err);
             setErrors(prev => [...prev, error]);
         }
@@ -110,12 +108,16 @@ const Units = () => {
                             className: "min-w-0",
                         }}
                     />
-                    <Button
+
+                    <button
                         type="submit"
-                        size="sm"
-                        color={unitName ? "teal" : "gray"}
                         disabled={!unitName}
-                        className={"ml-2 rounded"}>Create</Button>
+                        className={`ml-2 p-2.5 w-20 text-xs font-bold text-white rounded shadow-lg ${
+                            !unitName ? "bg-gray-400" : "bg-teal-500"
+                        }`}
+                    >
+                        CREATE
+                    </button>
                 </form>
             </div>
 

@@ -11,11 +11,12 @@ class customers_repo {
         return new Promise((resolve, reject) => {
             db.run(query,
                 [
+                    customer.customer_id,
                     customer.name,
                     customer.address,
                     customer.email,
                     customer.contact_number,
-                    customer.customer_id
+                    customer.id,
                 ],
                 function (err) {
                 if (err) {
@@ -64,13 +65,13 @@ class customers_repo {
         })
     }
 
-    static async getCustomer(customer_id) {
-        let query = customer_queries.GET_CUSTOMERS + ' WHERE customer_id = ?;';
+    static async getCustomer(id) {
+        let query = customer_queries.GET_CUSTOMERS + ' WHERE id = ?;';
 
         const db = await getDB();
 
         return new Promise ((resolve, reject) => {
-            db.all(query, [customer_id], (err, result) => {
+            db.all(query, [id], (err, result) => {
                 if (err) {
                     return reject(err);
                 }
@@ -79,12 +80,12 @@ class customers_repo {
         });
     }
 
-    static async deleteCustomer(customer_id) {
+    static async deleteCustomer(id) {
         const db = await getDB();
         const query = customer_queries.DELETE_CUSTOMER;
 
         return new Promise((resolve, reject) => {
-            db.run(query, [customer_id.toString()], function (err) {
+            db.run(query, [id.toString()], function (err) {
                 if (err) {
                     return reject(err);
                 }

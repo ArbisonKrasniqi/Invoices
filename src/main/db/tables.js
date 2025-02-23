@@ -1,6 +1,7 @@
 const CREATE_CUSTOMERS_TABLE = `
   CREATE TABLE IF NOT EXISTS Customers (
-    customer_id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id INTEGER NOT NULL,
     name TEXT NOT NULL,
     address TEXT,
     email TEXT,

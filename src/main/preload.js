@@ -6,7 +6,7 @@ contextBridge.exposeInMainWorld('api', {
     //Customers
     addCustomer: async (customer) => await ipcRenderer.invoke('addCustomer', customer),
     getCustomers: async () => await ipcRenderer.invoke('getCustomers'),
-    deleteCustomer: async (customer_id) => await ipcRenderer.invoke('deleteCustomer', customer_id),
+    deleteCustomer: async (id) => await ipcRenderer.invoke('deleteCustomer', id),
     updateCustomer: async (customer) => await ipcRenderer.invoke('updateCustomer', customer),
 
     //Units

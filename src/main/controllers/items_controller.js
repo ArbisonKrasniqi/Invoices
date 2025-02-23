@@ -22,12 +22,12 @@ const setupItemsController = () => {
         }
     })
 
-    ipcMain.handle("deleteItem", async (event, item) => {
+    ipcMain.handle("deleteItem", async (event, item_id) => {
         try {
-            const list = await items_repo.getItem(item.item_id);
+            const list = await items_repo.getItem(item_id);
             if (list.length === 0) throw new Error("Item not found");
 
-            const deletedItem = await items_repo.deleteItem(item.item_id);
+            const deletedItem = await items_repo.deleteItem(item_id);
             return new CustomSuccess(deletedItem);
         } catch (err) {
             return CustomError.fromError(err)
